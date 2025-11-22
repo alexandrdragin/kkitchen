@@ -1,497 +1,290 @@
-# 🍳 Recipe Extraction Project - Complete Package
+# 🍳 Telegram Recipe Catalog Mini App
 
-## 📦 What's in This Folder?
+A complete Telegram Mini App (Web App) for browsing 399+ recipes from the КЕРЦМАН cooking channel.
 
-This folder contains a **complete recipe extraction and categorization system** for the Telegram cooking channel "КЕРЦМАН (ex вкус)".
+## 🚀 Features
 
----
+- **Search**: Find recipes by title, ingredients, or description
+- **Filters**: Filter by category, cuisine, difficulty, cooking time
+- **Recipe of the Day**: Daily featured recipe
+- **Detailed Recipe Pages**: Ingredients, steps, tags, and more
+- **Telegram Integration**: Native theme support, back button, haptic feedback
+- **Mobile-First**: Optimized for Telegram mobile experience
+- **Fast & Lightweight**: Static export, no backend required
 
-## 📂 File Structure
+## 🛠️ Tech Stack
 
-```
-kkitchen/
-│
-├── 📄 README.md                              ← You are here!
-│   └── Project overview and quick start guide
-│
-├── 📊 INPUT DATA
-│   └── kerzmaneat_1763203806174.json         (8.5 MB)
-│       └── Original Telegram channel data (3,793 posts)
-│
-├── ✨ OUTPUT DATA
-│   ├── recipes_extracted.json                (1.2 MB) ⭐ MAIN OUTPUT
-│   │   └── 399 structured, categorized recipes
-│   │
-│   └── extraction_summary.json               (1 KB)
-│       └── Statistics and distribution data
-│
-├── 🛠️ PROCESSING SCRIPT
-│   └── recipe_extractor.py                   (15 KB)
-│       └── Python script for extracting recipes
-│
-└── 📖 DOCUMENTATION
-    ├── PROJECT_SUMMARY.md                    (10 KB) ⭐ START HERE
-    │   └── Executive summary with key insights
-    │
-    ├── RECIPE_SYSTEM_DOCUMENTATION.md        (30 KB)
-    │   └── Complete technical documentation
-    │
-    └── CATEGORIZATION_REFERENCE.md           (12 KB)
-        └── Visual guide to categories and tags
+- **Framework**: Next.js 14 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Telegram**: Official Telegram Mini Apps SDK
+- **Deployment**: Vercel (static export)
+
+## 📦 Installation
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Build for production
+npm run build
 ```
 
----
+## 🌐 Deployment to Vercel
 
-## 🎯 Quick Start
+### Method 1: Vercel CLI (Recommended)
 
-### For Developers
+```bash
+# Install Vercel CLI
+npm i -g vercel
 
-**1. Load the data:**
-```python
-import json
-
-with open('recipes_extracted.json', 'r', encoding='utf-8') as f:
-    data = json.load(f)
-
-recipes = data['recipes']
-print(f"Loaded {len(recipes)} recipes")  # Output: 399
+# Deploy
+vercel
 ```
 
-**2. Find recipes by category:**
-```python
-pasta_recipes = [r for r in recipes if 'Паста' in r['categories']]
-print(f"Found {len(pasta_recipes)} pasta recipes")  # Output: 63
+### Method 2: GitHub Integration
+
+1. Push code to GitHub
+2. Import repository in [Vercel Dashboard](https://vercel.com/new)
+3. Vercel will auto-detect Next.js and deploy
+
+### Method 3: Manual Deploy
+
+```bash
+# Build the project
+npm run build
+
+# The static export will be in the 'out' folder
+# Upload the 'out' folder to any static hosting
 ```
 
-**3. Filter by cuisine and difficulty:**
-```python
-easy_italian = [
-    r for r in recipes 
-    if r.get('cuisine') == 'Итальянская' 
-    and r.get('difficulty') == 'Легко'
-]
-print(f"Easy Italian recipes: {len(easy_italian)}")
-```
+## 🤖 Telegram Bot Setup
 
-### For Product Managers
+### 1. Create a Bot
 
-**Read these files in order:**
-1. 📄 `PROJECT_SUMMARY.md` - Overview and business context
-2. 📄 `CATEGORIZATION_REFERENCE.md` - UI/UX filter design
-3. 📄 `RECIPE_SYSTEM_DOCUMENTATION.md` - Technical deep-dive
-
-### For Data Scientists
-
-**Interesting analysis opportunities:**
-- Recipe complexity prediction (text length, ingredient count, steps)
-- Ingredient co-occurrence patterns
-- Cuisine classification model training
-- User preference modeling (if you add user data)
-
----
-
-## 📊 Project Results Summary
-
-### Extraction Statistics
-
-| Metric | Value |
-|--------|-------|
-| **Input posts** | 3,793 |
-| **Recipes extracted** | 399 (10.5%) |
-| **Categories defined** | 12 |
-| **Cuisine types** | 5 major, 8 total |
-| **Unique tags** | 20+ |
-| **Avg recipe length** | 800-2000 characters |
-
-### Top Categories
+Talk to [@BotFather](https://t.me/botfather):
 
 ```
-1. Суп (Soup)               ████████████████████ 187 recipes
-2. Соус (Sauce)             ████████████████ 164 recipes
-3. Гарнир (Side Dish)       ████████ 125 recipes
-4. Мясо (Meat)              ████████ 122 recipes
-5. Завтрак (Breakfast)      ███ 88 recipes
-6. Рыба (Fish & Seafood)    ███ 85 recipes
-7. Паста (Pasta)            ██ 63 recipes
-8. Салат (Salad)            ██ 55 recipes
+/newbot
 ```
 
-### Top Cuisines
+Follow instructions to create your bot.
+
+### 2. Set Web App URL
+
+After deploying to Vercel, you'll get a URL like:
+```
+https://your-app.vercel.app
+```
+
+Tell BotFather to set the Web App:
 
 ```
-1. Итальянская (Italian)           ████████████ 111 (27.8%)
-2. Средиземноморская (Mediterranean) ████████ 79 (19.8%)
-3. Русская (Russian)               ████ 54 (13.5%)
-4. Азиатская (Asian)               █ 22 (5.5%)
-5. Французская (French)            █ 17 (4.3%)
+/newapp
 ```
 
-### Difficulty Distribution
+Select your bot, then provide:
+- **Web App URL**: `https://your-app.vercel.app`
+- **Title**: Recipe Catalog
+- **Description**: Browse 399+ delicious recipes
+- **Photo**: Upload a nice food photo
 
-- **Easy**: 203 recipes (50.9%) ✅ Most recipes are beginner-friendly
-- **Medium**: 28 recipes (7.0%)
-- **Hard**: 14 recipes (3.5%)
-- **Not specified**: 154 recipes (38.6%)
+### 3. Create Menu Button (Optional)
 
----
+```
+/setmenubutton
+```
 
-## 🎨 Categorization System
+Select your bot, then:
+- Button text: "🍳 Открыть каталог"
+- Web App URL: `https://your-app.vercel.app`
 
-### 12 Primary Categories
+### 4. Test Your Mini App
 
-Recipes can belong to **multiple categories** simultaneously:
+Open your bot in Telegram and click the menu button or send:
 
-1. **Суп** (Soup) - All types of soups and broths
-2. **Соус** (Sauce) - Sauces, dressings, marinades
-3. **Гарнир** (Side Dish) - Potatoes, rice, vegetables
-4. **Мясо** (Meat) - Chicken, beef, pork, lamb
-5. **Завтрак** (Breakfast) - Eggs, toast, pancakes
-6. **Рыба и морепродукты** (Fish & Seafood)
-7. **Паста** (Pasta) - Italian pasta dishes
-8. **Салат** (Salad) - Fresh and cooked salads
-9. **Выпечка** (Baking) - Breads, pizzas, pastries
-10. **Основное блюдо** (Main Course) - Generic mains
-11. **Десерт** (Dessert) - Sweets and desserts
-12. **Закуска** (Appetizer) - Appetizers and starters
+```
+/start
+```
 
-### 7 Tag Dimensions
+The Web App should open!
 
-Tags are organized into semantic groups:
+## 🎨 Customization
 
-1. **🌍 Cuisine**: Italian, Mediterranean, Russian, Asian, French
-2. **👨‍🍳 Method**: Frying, Baking, Boiling, Braising, Steaming
-3. **⭐ Difficulty**: Easy, Medium, Hard
-4. **⏱️ Time**: Quick (≤30 min), Long (>30 min)
-5. **🥗 Diet**: Low-calorie, Vegan, Vegetarian, Gluten-free
-6. **🌤️ Season**: Summer, Winter, Autumn, Spring
-7. **🎉 Context**: Home cooking, For guests, Oven-baked
+### Change Theme Colors
 
-**Example recipe with tags:**
-```json
-{
-  "title": "Курица брезе в вине и апельсине",
-  "categories": ["Мясо"],
-  "tags": ["французская", "тушение", "легко", "для гостей"],
-  "cuisine": "Французская",
-  "difficulty": "Легко",
-  "cooking_time": "45 минут"
+Edit `src/app/globals.css`:
+
+```css
+:root {
+  --tg-theme-bg-color: #ffffff;
+  --tg-theme-button-color: #40a7e3;
+  /* ... other colors */
 }
 ```
 
----
+### Modify Recipe Data
 
-## 🔍 Sample Queries
+Edit `src/data/recipes_extracted.json` to add/remove/modify recipes.
 
-### Find All Italian Pasta Recipes
-```python
-results = [
-    r for r in recipes 
-    if 'Паста' in r['categories'] 
-    and r.get('cuisine') == 'Итальянская'
-]
-# Returns: ~50 recipes
+### Add New Filters
+
+Edit `src/components/FilterPanel.tsx` to add custom filters.
+
+## 📱 Testing Locally
+
+### Option 1: Telegram Web
+
+1. Open [Telegram Web](https://web.telegram.org/)
+2. Open your bot
+3. Click the Web App button
+
+### Option 2: ngrok (for mobile testing)
+
+```bash
+# Install ngrok
+npm install -g ngrok
+
+# Run dev server
+npm run dev
+
+# In another terminal, expose localhost
+ngrok http 3000
+
+# Use the ngrok HTTPS URL in BotFather
 ```
 
-### Find Quick & Easy Dinners
-```python
-results = [
-    r for r in recipes 
-    if r.get('difficulty') == 'Легко'
-    and 'быстрое приготовление' in r.get('tags', [])
-]
-# Returns: ~120 recipes
+### Option 3: Browser DevTools
+
+Open in browser: `http://localhost:3000?tgWebAppPlatform=ios`
+
+## 🔧 Environment Variables
+
+No environment variables required! The app is fully static.
+
+## 📂 Project Structure
+
+```
+telegram-recipe-app/
+├── src/
+│   ├── app/                    # Next.js pages
+│   │   ├── page.tsx           # Main catalog page
+│   │   ├── recipe/[id]/       # Recipe detail page
+│   │   ├── layout.tsx         # Root layout
+│   │   └── globals.css        # Global styles
+│   ├── components/             # React components
+│   │   ├── TelegramProvider.tsx
+│   │   ├── SearchBar.tsx
+│   │   ├── FilterPanel.tsx
+│   │   ├── RecipeCard.tsx
+│   │   └── RecipeOfTheDay.tsx
+│   ├── lib/                    # Utilities
+│   │   ├── telegram.ts        # Telegram WebApp helpers
+│   │   └── recipeHelpers.ts   # Recipe filtering/search
+│   ├── types/                  # TypeScript types
+│   │   ├── recipe.ts
+│   │   └── telegram.d.ts
+│   └── data/                   # Data files
+│       └── recipes_extracted.json
+├── public/                     # Static assets
+├── package.json
+├── next.config.js
+├── tailwind.config.js
+└── tsconfig.json
 ```
 
-### Find Vegetarian Summer Salads
-```python
-results = [
-    r for r in recipes 
-    if 'Салат' in r['categories']
-    and 'летнее' in r.get('tags', [])
-    and any(tag in r.get('tags', []) for tag in ['веган', 'вегетарианское'])
-]
-# Returns: ~10-15 recipes
+## 🎯 Features Breakdown
+
+### Main Page (`/`)
+- Search bar with real-time filtering
+- Filter panel (category, cuisine, difficulty, time)
+- "Recipe of the Day" featured card
+- Recipe grid with cards
+- Results count
+- Reset filters button
+
+### Recipe Page (`/recipe/[id]`)
+- Hero image
+- Title and description
+- Meta info badges (difficulty, time, cuisine)
+- Categories tags
+- Ingredients list with bullet points
+- Step-by-step instructions with numbered steps
+- Related tags
+- Telegram back button integration
+
+### Telegram Integration
+- `window.Telegram.WebApp.ready()` on init
+- Theme color adaptation (light/dark mode)
+- Back button with navigation
+- Haptic feedback on interactions
+- Expandable viewport
+- Query params support (`?id=recipe_1234`)
+
+## 🐛 Troubleshooting
+
+### Web App doesn't open in Telegram
+
+- Make sure the URL is HTTPS (required by Telegram)
+- Check that the URL is correctly set in BotFather
+- Try clearing Telegram cache
+
+### Theme colors not working
+
+- Telegram WebApp SDK script must load first
+- Check browser console for errors
+- Fallback colors are applied if SDK unavailable
+
+### Build errors
+
+```bash
+# Clear Next.js cache
+rm -rf .next
+
+# Reinstall dependencies
+rm -rf node_modules package-lock.json
+npm install
+
+# Rebuild
+npm run build
 ```
 
----
+### Recipe images not showing
 
-## 🚀 Next Steps & Recommendations
+- Images are placeholders with colored backgrounds
+- To add real images, update the `images` array in recipes JSON
 
-### Immediate (Week 1-2)
-- [ ] Manual review of top 50 most popular recipes
-- [ ] Extract and link recipe images from Telegram
-- [ ] Build simple recipe browsing website
-- [ ] Implement basic search and filtering
+## 📖 Documentation
 
-### Short-term (Month 1)
-- [ ] User accounts and favorites
-- [ ] Rating system (5 stars)
-- [ ] Mobile-responsive design
-- [ ] Social sharing (WhatsApp, Telegram)
-
-### Medium-term (Months 2-3)
-- [ ] Nutritional information (calories, macros)
-- [ ] Recipe scaling (adjust servings)
-- [ ] Shopping list generator
-- [ ] Meal planning feature
-
-### Long-term (Months 4+)
-- [ ] Mobile apps (iOS/Android)
-- [ ] Community features (comments, photos)
-- [ ] ML-based recipe recommendations
-- [ ] Video tutorials
-- [ ] Multi-language support
-
----
-
-## 🛠️ Recommended Tech Stack
-
-### For Recipe Website/App
-
-**Frontend:**
-- React/Next.js + TypeScript
-- TailwindCSS (styling)
-- React Query (data fetching)
-- Framer Motion (animations)
-
-**Backend:**
-- Node.js/Express or Python/FastAPI
-- PostgreSQL (recipe data)
-- Elasticsearch (full-text search)
-- Redis (caching)
-
-**Infrastructure:**
-- Vercel/Netlify (hosting)
-- AWS S3/Cloudflare R2 (images)
-- CDN (fast delivery)
-
-**Analytics:**
-- PostHog or Mixpanel (user behavior)
-- Track: searches, views, saves, ratings
-
----
-
-## 📖 Documentation Guide
-
-### Which file to read?
-
-**"I'm a developer building a recipe app"**
-→ Read: `RECIPE_SYSTEM_DOCUMENTATION.md`
-→ Focus on: Data Model, API design, Search implementation
-
-**"I'm a product manager planning features"**
-→ Read: `PROJECT_SUMMARY.md`
-→ Focus on: Insights, Recommendations, User features
-
-**"I'm a UX designer creating filters"**
-→ Read: `CATEGORIZATION_REFERENCE.md`
-→ Focus on: Filter UI mockups, Tag combinations
-
-**"I'm a data analyst exploring the data"**
-→ Read: `extraction_summary.json` + explore `recipes_extracted.json`
-→ Tools: Python pandas, Jupyter notebook
-
----
-
-## 💡 Sample Recipe
-
-Here's what a typical extracted recipe looks like:
-
-```json
-{
-  "id": "recipe_4389",
-  "title": "Сибас аква-пацца",
-  "description": "Идеальный ужин за 10 минут. Филе обжарить до красивого цвета, добавить каперсы, оливки, томаты черри, вино и тушить 7 минут.",
-  "ingredients": [
-    "Филе сибаса",
-    "2 зубчика чеснока",
-    "1 ст.л. каперсов",
-    "10 оливок каламата и халкидики",
-    "150-200 г черри",
-    "70-100 мл белого вина"
-  ],
-  "steps": [
-    "Филе обжарить со стороны мяса на оливковом масле с перцем и солью",
-    "Перевернуть, добавить чеснок, каперсы, оливки, черри, цедру лимона",
-    "Влить вино и воду, убавить огонь до 3",
-    "Накрыть крышкой и готовить 7 минут",
-    "Посыпать петрушкой"
-  ],
-  "categories": ["Рыба и морепродукты"],
-  "tags": [
-    "средиземноморская",
-    "быстрое приготовление",
-    "легко",
-    "жарка",
-    "тушение"
-  ],
-  "source_post_id": 4389,
-  "post_date": "2025-11-05T18:46:01.000Z",
-  "cooking_time": "10 минут",
-  "difficulty": "Легко",
-  "cuisine": "Средиземноморская"
-}
-```
-
----
-
-## ⚠️ Known Limitations
-
-### Data Quality Issues (10-20% of recipes)
-
-1. **Incomplete ingredients** (~30%)
-   - Some ingredients mentioned in text but not extracted
-   - Measurements may be vague ("по вкусу", "щепотка")
-
-2. **Unstructured steps** (~20%)
-   - Long paragraph-style instructions
-   - Steps may include commentary
-
-3. **Missing images** (100%)
-   - Images not extracted in current version
-   - Can be added by matching post IDs to Telegram media
-
-4. **Potential duplicates** (~5-10 recipes)
-   - Same recipe posted multiple times with edits
-   - Needs deduplication
-
-5. **Categorization accuracy** (~85-90%)
-   - Keyword-based system has false positives
-   - Manual review recommended for top recipes
-
-### Recommended Actions
-
-✅ **For Production Use:**
-1. Manually review top 100 recipes (by popularity)
-2. Add missing ingredients/steps
-3. Extract and link images
-4. Deduplicate similar recipes
-5. Validate categories and tags
-
----
-
-## 🎓 Learning Resources
-
-### Understanding the Code
-
-**`recipe_extractor.py` - Key Functions:**
-
-```python
-is_recipe(text)           # Determines if a post is a recipe
-extract_title(text)       # Extracts recipe title
-extract_ingredients(text) # Parses ingredients list
-extract_steps(text)       # Extracts cooking steps
-categorize(text)          # Assigns categories and tags
-```
-
-### Customizing Extraction
-
-**To adjust recipe detection:**
-```python
-# In recipe_extractor.py, line ~60
-RECIPE_THRESHOLD = 3  # Change to 4 for stricter matching
-```
-
-**To add new categories:**
-```python
-# Add to DISH_TYPE_INDICATORS dictionary
-DISH_TYPE_INDICATORS = {
-    'Напитки': ['коктейль', 'смузи', 'сок', 'лимонад'],
-    # ... existing categories
-}
-```
-
-**To add new cuisine types:**
-```python
-# Add to CUISINE_INDICATORS dictionary
-CUISINE_INDICATORS = {
-    'Индийская': ['карри', 'тандури', 'чатни', 'наан'],
-    # ... existing cuisines
-}
-```
-
----
+- [Telegram Mini Apps Docs](https://core.telegram.org/bots/webapps)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Tailwind CSS Docs](https://tailwindcss.com/docs)
+- [Vercel Deployment Guide](https://vercel.com/docs)
 
 ## 🤝 Contributing
 
-### Improving Recipe Data
+Feel free to:
+- Add more recipes
+- Improve filtering logic
+- Enhance UI/UX
+- Add new features (favorites, share, etc.)
 
-If you find errors or want to improve recipe quality:
+## 📝 License
 
-1. **Fork the data**: Work on a copy of `recipes_extracted.json`
-2. **Make corrections**: Fix ingredients, steps, or categories
-3. **Document changes**: Keep a changelog
-4. **Share improvements**: Submit corrected data
+Original recipes content © КЕРЦМАН Telegram channel  
+App code: Free to use and modify
 
-### Adding Features
+## 🙏 Credits
 
-Ideas for enhancements:
-
-- ✨ Add more dietary tags (keto, paleo, etc.)
-- 🖼️ Extract images from Telegram
-- 🔊 Add voice-controlled "next step" feature
-- 📊 Generate nutrition data using API
-- 🤖 ML model for better categorization
-- 🌐 Multi-language support
+- Recipe data extracted from [@kerzmaneat](https://t.me/kerzmaneat)
+- Built with Next.js, Tailwind CSS, and Telegram Mini Apps SDK
 
 ---
 
-## 📞 Support & Contact
+**Need help?** Open an issue or check the [Telegram Mini Apps documentation](https://core.telegram.org/bots/webapps).
 
-**Data Source**: Telegram channel [@kerzmaneat](https://t.me/kerzmaneat)  
-**Channel Author**: Арсений Керцман  
-**Extraction Date**: November 19, 2025
-
-**For technical questions:**
-- Review the code in `recipe_extractor.py`
-- Check documentation in `RECIPE_SYSTEM_DOCUMENTATION.md`
-
-**For data questions:**
-- See statistics in `extraction_summary.json`
-- Browse sample recipes in `recipes_extracted.json`
-
----
-
-## 📜 License & Attribution
-
-**Original Content**: © КЕРЦМАН Telegram channel  
-**Data Format**: Public channel data (no private information)  
-**Extraction Script**: Open for educational/commercial use  
-**Attribution**: Please credit original channel when using recipes
-
----
-
-## ✅ Validation Checklist
-
-Before using this data in production:
-
-- [ ] Manually review top 50 recipes
-- [ ] Validate ingredient measurements
-- [ ] Check cooking times for accuracy
-- [ ] Verify category assignments
-- [ ] Add missing images
-- [ ] Test search functionality
-- [ ] Ensure mobile responsiveness
-- [ ] Implement user feedback mechanism
-
----
-
-## 🎉 Conclusion
-
-You now have:
-- ✅ **399 structured recipes** ready for database import
-- ✅ **12 categories** and **20+ tags** for filtering
-- ✅ **Complete documentation** with examples and recommendations
-- ✅ **Reusable extraction script** for future updates
-- ✅ **Clear roadmap** for building a recipe app
-
-**Ready to build? Start with `PROJECT_SUMMARY.md` for the big picture!**
-
----
-
-**Last Updated**: November 19, 2025  
-**Project Status**: ✅ **COMPLETE**  
-**Data Quality**: ⭐⭐⭐⭐⚫ 4/5
-
-**Happy Cooking! 🍳👨‍🍳**
+**Happy cooking! 🍳👨‍🍳**
 
